@@ -14,7 +14,7 @@ const NavBarStyled = styled.header`
     align-items: center;
     background: #299B01;
     justify-content: space-between;
-    padding: 15px;
+    padding: 30px;
     box-sizing: border-box;
     color: white;
 `;

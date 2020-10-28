@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 const List = styled.ul`
     display: flex;
-    justyfy-content: space-around;
+    justify-content: space-around;
     flex-wrap: wrap;
 `;
 
 const Item = styled.li`
     position: relative;
-    width: 400px;
-    height: 155px;
+    width: 300px;
+    height: 115px;
     background-image: ${({ img }) => `url(${img})`};
     background-position: center;
     background-size: cover;
@@ -43,21 +43,22 @@ const Item = styled.li`
 `;
 
 const Name = styled.span`
-    font-size: 30px;
-    line-height: 35px;
+    font-size: 20px;
+    line-height: 25px;
 `;
 
 const Price = styled.span`
-    font-size: 30px;
-    line-height: 35px;
+    font-size: 20px;
+    line-height: 25px;
 `;
 
-const ListItem = ({ itemList }) => (
+const ListItem = ({ itemList, setOpenItem }) => (
     <List>
         {itemList.map(item => (
             <Item 
                 key={item.id}
                 img={item.img}
+                onClick={()=>{setOpenItem(item)}}
             >
                 <Name>{item.name}</Name>
                 <Price>{item.price.toLocaleString('ru-RU', {style: 'currency', currency: 'RUB'})}</Price>

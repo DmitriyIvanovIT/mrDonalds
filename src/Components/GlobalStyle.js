@@ -50,6 +50,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     background: transparent;
     border: none;
+    font-family: 'Roboto', sans-serif;
   }
 
   button, input {

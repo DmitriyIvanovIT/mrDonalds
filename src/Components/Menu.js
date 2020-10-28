@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import Baner from './Baner';
 import DBMenu from './DBMenu';
 import ListItem from './ListItem';
-import banerImg from '../image/banner.png';
+
 
 const MenuStyled = styled.main`
     background: #ccc;
@@ -16,24 +17,25 @@ const SectionMenu = styled.section`
     padding: 30px;
 `;
 
-const Baner = styled.div`
-    width: 100%;
-    height: 210px;
-    background: url(${banerImg}) no-repeat center center / cover;
 
-`;
 
-const Menu = () => (
+const Menu = ({ setOpenItem }) => (
     <>
         <MenuStyled>
             <Baner/>
             <SectionMenu >
                 <h2>Бургеры</h2>
-                <ListItem itemList={DBMenu.burger}/>
+                <ListItem 
+                    itemList={DBMenu.burger}
+                    setOpenItem={setOpenItem}
+                />
             </SectionMenu>
             <SectionMenu >
                 <h2>Закуски / Напитики</h2>
-                <ListItem itemList={DBMenu.other}/>
+                <ListItem 
+                    itemList={DBMenu.other}
+                    setOpenItem={setOpenItem}
+                />
             </SectionMenu>
         </MenuStyled>
     </>
