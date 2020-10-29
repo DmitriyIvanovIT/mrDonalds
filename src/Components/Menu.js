@@ -11,6 +11,7 @@ const MenuStyled = styled.main`
     font-family: inheirt;
     display: flex;
     flex-direction: column;
+    margin-left: 380px;
 `;
 
 const SectionMenu = styled.section`
