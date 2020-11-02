@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CheckButton } from './CheckButton';
+import { CheckButton } from '../style/CheckButton';
 
 const Overlay = styled.div`
     position: fixed;
@@ -61,15 +61,21 @@ const ProductPrices = styled.span`
     font-family: 'Pacifico', sans-serif;
 `;
 
-const ModalItem = ({ openItem, setOpenItem }) => {
+const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+
+    const order = {
+        ...openItem
+    };
 
     const closeModal = e => {
         if(e.target.id === 'overlay') {
             setOpenItem(null);
         }
+    },
+    addToOrder = () => {
+        setOrders([...orders, order]);
+        setOpenItem(null);
     };
-
-    if (!openItem) return null;
     
     return(
         <>
@@ -86,7 +92,7 @@ const ModalItem = ({ openItem, setOpenItem }) => {
                                 {openItem.price.toLocaleString('ru-RU', {style: 'currency', currency: 'RUB'})}
                             </ProductPrices>
                         </ProductBlock>
-                        <CheckButton>Добавить</CheckButton>
+                        <CheckButton onClick={addToOrder}>Добавить</CheckButton>
                     </Content>
                 </Modal>
             </Overlay>

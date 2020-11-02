@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import cartIcon from '../image/cart-icon.svg';
+import cartIcon from '../../image/cart-icon.svg';
 
 const OrderItemStyled = styled.li`
     display: flex;
@@ -47,12 +47,13 @@ const ItemPrice = styled.span`
     text-align: right;
 `;
 
-const OrderListItem = () => {
+const OrderListItem = ({ order }) => {
     return (
         <OrderItemStyled>
-            <ItemName>JS Burger</ItemName>
+            <ItemName>{order.name}</ItemName>
             <ItemCount>1</ItemCount>
-            <ItemPrice>250₽</ItemPrice>
+            <ItemPrice>{order.price.toLocaleString('ru-RU', 
+                        {style: 'currency', currency: 'RUB'})}</ItemPrice>
             <TrashButton/>
         </OrderItemStyled>
     );
