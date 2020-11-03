@@ -5,7 +5,7 @@ import { formatCurrent, totalPriceItems } from '../Functions/seconderyFunction';
 
 const OrderItemStyled = styled.li`
     display: flex;
-    align-items: center;
+    align-items: start;
     margin: 15px 0;
 `;
 
@@ -16,13 +16,26 @@ const TrashButton = styled.button`
     cursor: pointer;
 `;
 
-const ItemName = styled.span`
+const TextBlock = styled.div`
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+`;
+
+const ItemName = styled.span`
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 23px;
+    color: #000000;
+`;
+
+const ItemToppings = styled.span`
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
     color: #000000;
 `;
 
@@ -51,7 +64,15 @@ const ItemPrice = styled.span`
 const OrderListItem = ({ order }) => {
     return (
         <OrderItemStyled>
-            <ItemName>{order.name}</ItemName>
+            <TextBlock>
+                <ItemName>{order.name}</ItemName>
+                {order.topping &&
+                    <ItemToppings>
+                        {order.topping.filter(item => item.checked)
+                            .map(item => item.name).join(', ')}
+                    </ItemToppings>}
+                
+            </TextBlock>
             <ItemCount>{order.count}</ItemCount>
             <ItemPrice>{formatCurrent(totalPriceItems(order))}</ItemPrice>
             <TrashButton/>

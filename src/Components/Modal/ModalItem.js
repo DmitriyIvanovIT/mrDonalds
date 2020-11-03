@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { formatCurrent, totalPriceItems } from '../Functions/seconderyFunction';
 import useCount from '../Hooks/useCount';
+import { useToppings } from '../Hooks/useToppings';
 import { CheckButton } from '../style/CheckButton';
 import CountItem from './CountItem';
+import Toppings from './Toppings';
 
 
 const Overlay = styled.div`
@@ -39,8 +41,6 @@ const ProductBlock = styled.div`
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    
-    margin-bottom: auto;
 `;
 
 const Content = styled.div`
@@ -68,7 +68,6 @@ const ProductPrices = styled.span`
 const TotalPriceItem = styled.div`
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
 `;
 
 
@@ -77,9 +76,12 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const counter = useCount();
 
+    const toppings = useToppings(openItem);
+
     const order = {
         ...openItem,
-        count: counter.count
+        count: counter.count,
+        topping: toppings.toppings
     };
 
     const closeModal = e => {
@@ -108,6 +110,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                             </ProductPrices>
                         </ProductBlock>
                         <CountItem {...counter}/>
+                        {openItem.toppings && <Toppings {...toppings}/>}
                         <TotalPriceItem>
                             <span>Цена:</span>
                             <span>
