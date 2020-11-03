@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import seconderyFunction from '../Functions/seconderyFunction';
+import { formatCurrent } from '../Functions/seconderyFunction';
 
 const List = styled.ul`
     display: flex;
@@ -62,7 +62,7 @@ const ListItem = ({ itemList, setOpenItem }) => (
                 onClick={()=>{setOpenItem(item)}}
             >
                 <Name>{item.name}</Name>
-                <Price>{seconderyFunction(item.price)}</Price>
+                <Price>{formatCurrent(item.price)}</Price>
             </Item>
         ))}
     </List>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import seconderyFunction from '../Functions/seconderyFunction';
+import { formatCurrent, totalPriceItems } from '../Functions/seconderyFunction';
 import useCount from '../Hooks/useCount';
 import { CheckButton } from '../style/CheckButton';
 import CountItem from './CountItem';
@@ -71,7 +71,7 @@ const TotalPriceItem = styled.div`
     margin: 10px 0;
 `;
 
-export const totalPriceItems = order => order.price * order.count;
+
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
@@ -104,14 +104,14 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                         <ProductBlock>
                             <ProductName>{openItem.name}</ProductName>
                             <ProductPrices>
-                                {seconderyFunction(openItem.price)}
+                                {formatCurrent(openItem.price)}
                             </ProductPrices>
                         </ProductBlock>
                         <CountItem {...counter}/>
                         <TotalPriceItem>
                             <span>Цена:</span>
                             <span>
-                                {seconderyFunction(totalPriceItems(order))}
+                                {formatCurrent(totalPriceItems(order))}
                             </span>
                         </TotalPriceItem>
                         <CheckButton onClick={addToOrder}>Добавить</CheckButton>

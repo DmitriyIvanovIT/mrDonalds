@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { formatCurrent, totalPriceItems } from '../Functions/seconderyFunction';
 import { CheckButton } from '../style/CheckButton';
 import OrderListItem from './OrderListItem';
-import { totalPriceItems } from '../Modal/ModalItem';
-import seconderyFunction from '../Functions/seconderyFunction';
+
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -75,7 +75,7 @@ const Order = ({ orders }) => {
             <Total>
                 <span>Итого</span>
                 <span>5</span>
-                <TotalPrice>{seconderyFunction(total)}</TotalPrice>
+                <TotalPrice>{formatCurrent(total)}</TotalPrice>
             </Total>
             <CheckButton>Oформить</CheckButton>
         </OrderStyled>

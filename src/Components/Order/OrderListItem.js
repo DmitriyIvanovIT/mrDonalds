@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import cartIcon from '../../image/cart-icon.svg';
-import seconderyFunction from '../Functions/seconderyFunction';
-import { totalPriceItems } from '../Modal/ModalItem';
+import { formatCurrent, totalPriceItems } from '../Functions/seconderyFunction';
 
 const OrderItemStyled = styled.li`
     display: flex;
@@ -54,7 +53,7 @@ const OrderListItem = ({ order }) => {
         <OrderItemStyled>
             <ItemName>{order.name}</ItemName>
             <ItemCount>{order.count}</ItemCount>
-            <ItemPrice>{seconderyFunction(totalPriceItems(order))}</ItemPrice>
+            <ItemPrice>{formatCurrent(totalPriceItems(order))}</ItemPrice>
             <TrashButton/>
         </OrderItemStyled>
     );
