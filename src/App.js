@@ -1,7 +1,7 @@
 import React from 'react';
 import GlobalStyle from './Components/style/GlobalStyle';
 import Menu from './Components/Menu/Menu';
-import ModalItem from './Components/Modal/ModalItem';
+import { ModalItem } from './Components/Modal/ModalItem';
 import NavBar from './Components/NavBar/NavBar';
 import Order from './Components/Order/Order';
 import { useOpenItem } from './Components/Hooks/useOpenItem';

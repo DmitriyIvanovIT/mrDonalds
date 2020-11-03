@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import seconderyFunction from '../Functions/seconderyFunction';
 
 const List = styled.ul`
     display: flex;
@@ -61,7 +62,7 @@ const ListItem = ({ itemList, setOpenItem }) => (
                 onClick={()=>{setOpenItem(item)}}
             >
                 <Name>{item.name}</Name>
-                <Price>{item.price.toLocaleString('ru-RU', {style: 'currency', currency: 'RUB'})}</Price>
+                <Price>{seconderyFunction(item.price)}</Price>
             </Item>
         ))}
     </List>

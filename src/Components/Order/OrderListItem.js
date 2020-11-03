@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import cartIcon from '../../image/cart-icon.svg';
+import seconderyFunction from '../Functions/seconderyFunction';
+import { totalPriceItems } from '../Modal/ModalItem';
 
 const OrderItemStyled = styled.li`
     display: flex;
@@ -51,9 +53,8 @@ const OrderListItem = ({ order }) => {
     return (
         <OrderItemStyled>
             <ItemName>{order.name}</ItemName>
-            <ItemCount>1</ItemCount>
-            <ItemPrice>{order.price.toLocaleString('ru-RU', 
-                        {style: 'currency', currency: 'RUB'})}</ItemPrice>
+            <ItemCount>{order.count}</ItemCount>
+            <ItemPrice>{seconderyFunction(totalPriceItems(order))}</ItemPrice>
             <TrashButton/>
         </OrderItemStyled>
     );

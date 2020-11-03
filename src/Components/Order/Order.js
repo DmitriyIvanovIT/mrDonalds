@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { CheckButton } from '../style/CheckButton';
 import OrderListItem from './OrderListItem';
+import { totalPriceItems } from '../Modal/ModalItem';
+import seconderyFunction from '../Functions/seconderyFunction';
 
 const OrderStyled = styled.section`
     position: fixed;
@@ -56,6 +58,8 @@ const EmptyList = styled.p`
 `;
 
 const Order = ({ orders }) => {
+
+    const total = orders.reduce((result, order) => totalPriceItems(order) + result, 0);
     
     return (
         <OrderStyled >
@@ -71,7 +75,7 @@ const Order = ({ orders }) => {
             <Total>
                 <span>Итого</span>
                 <span>5</span>
-                <TotalPrice>850Р</TotalPrice>
+                <TotalPrice>{seconderyFunction(total)}</TotalPrice>
             </Total>
             <CheckButton>Oформить</CheckButton>
         </OrderStyled>

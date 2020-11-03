@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import seconderyFunction from '../Functions/seconderyFunction';
+import useCount from '../Hooks/useCount';
 import { CheckButton } from '../style/CheckButton';
+import CountItem from './CountItem';
+
 
 const Overlay = styled.div`
     position: fixed;
@@ -61,10 +65,21 @@ const ProductPrices = styled.span`
     font-family: 'Pacifico', sans-serif;
 `;
 
-const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+const TotalPriceItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+`;
+
+export const totalPriceItems = order => order.price * order.count;
+
+export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+
+    const counter = useCount();
 
     const order = {
-        ...openItem
+        ...openItem,
+        count: counter.count
     };
 
     const closeModal = e => {
@@ -89,9 +104,16 @@ const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                         <ProductBlock>
                             <ProductName>{openItem.name}</ProductName>
                             <ProductPrices>
-                                {openItem.price.toLocaleString('ru-RU', {style: 'currency', currency: 'RUB'})}
+                                {seconderyFunction(openItem.price)}
                             </ProductPrices>
                         </ProductBlock>
+                        <CountItem {...counter}/>
+                        <TotalPriceItem>
+                            <span>Цена:</span>
+                            <span>
+                                {seconderyFunction(totalPriceItems(order))}
+                            </span>
+                        </TotalPriceItem>
                         <CheckButton onClick={addToOrder}>Добавить</CheckButton>
                     </Content>
                 </Modal>
@@ -99,5 +121,3 @@ const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
         </>
     );
 };
-
-export default ModalItem;
