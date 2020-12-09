@@ -7,6 +7,7 @@ const OrderItemStyled = styled.li`
     display: flex;
     align-items: start;
     margin: 15px 0;
+    flex-wrap: wrap;
 `;
 
 const TrashButton = styled.button`
@@ -16,13 +17,8 @@ const TrashButton = styled.button`
     cursor: pointer;
 `;
 
-const TextBlock = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-`;
-
 const ItemName = styled.span`
+    flex-grow: 1;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -31,12 +27,13 @@ const ItemName = styled.span`
     color: #000000;
 `;
 
-const ItemToppings = styled.span`
+const ItemToppings = styled.div`
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 10px;
-    color: #000000;
+    font-size: 14px;
+    color: #9a9a9a;
+    width: 100%;
 `;
 
 const ItemCount = styled.span`
@@ -62,20 +59,27 @@ const ItemPrice = styled.span`
 `;
 
 const OrderListItem = ({ order }) => {
+    const topping = order.topping.filter(item => item.checked)
+    .map(item => item.name).join(', ');
+
+    const choice = order.choice;
+
     return (
         <OrderItemStyled>
-            <TextBlock>
-                <ItemName>{order.name}</ItemName>
-                {order.topping &&
-                    <ItemToppings>
-                        {order.topping.filter(item => item.checked)
-                            .map(item => item.name).join(', ')}
-                    </ItemToppings>}
-                
-            </TextBlock>
+            <ItemName>{order.name}</ItemName>
             <ItemCount>{order.count}</ItemCount>
             <ItemPrice>{formatCurrent(totalPriceItems(order))}</ItemPrice>
             <TrashButton/>
+            {topping !== '' &&
+                <ItemToppings>
+                    Допы: {topping}
+                </ItemToppings>
+            }
+            {choice !== '' &&
+                <ItemToppings>
+                    {choice}
+                </ItemToppings>
+            }
         </OrderItemStyled>
     );
 };

@@ -12,7 +12,7 @@ const OrderStyled = styled.section`
     top: 80px;
     left: 0;
     background: #fff;
-    min-width: 380px;
+    width: 380px;
     height: calc(100% - 80px);
     box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.25);
     padding: 20px;
@@ -68,7 +68,7 @@ const Order = ({ orders }) => {
             <OrderContent>
                 {orders.length ?
                 <OrderList>
-                    {orders.map(order => <OrderListItem order={order}/>)}
+                    {orders.map((order, i) => <OrderListItem order={order} key={i}/>)}
                 </OrderList> :
                 <EmptyList>Список заказов пуст</EmptyList>
                 }

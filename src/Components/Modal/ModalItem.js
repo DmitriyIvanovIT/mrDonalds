@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { formatCurrent, totalPriceItems } from '../Functions/seconderyFunction';
 import useCount from '../Hooks/useCount';
 import { useToppings } from '../Hooks/useToppings';
+import { useChoices } from '../Hooks/useChoices';
 import { CheckButton } from '../style/CheckButton';
 import CountItem from './CountItem';
 import Toppings from './Toppings';
+import Choices from './Choices';
 
 
 const Overlay = styled.div`
@@ -78,10 +80,13 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const toppings = useToppings(openItem);
 
+    const choices = useChoices(openItem);
+
     const order = {
         ...openItem,
         count: counter.count,
-        topping: toppings.toppings
+        topping: toppings.toppings,
+        choice: choices.choice
     };
 
     const closeModal = e => {
@@ -111,13 +116,19 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                         </ProductBlock>
                         <CountItem {...counter}/>
                         {openItem.toppings && <Toppings {...toppings}/>}
+                        {openItem.choices && <Choices {...choices} openItem={openItem}/>}
                         <TotalPriceItem>
                             <span>Цена:</span>
                             <span>
                                 {formatCurrent(totalPriceItems(order))}
                             </span>
                         </TotalPriceItem>
-                        <CheckButton onClick={addToOrder}>Добавить</CheckButton>
+                        <CheckButton 
+                            onClick={addToOrder}
+                            disabled={order.choices && !order.choice}
+                        >
+                            Добавить
+                        </CheckButton>
                     </Content>
                 </Modal>
             </Overlay>

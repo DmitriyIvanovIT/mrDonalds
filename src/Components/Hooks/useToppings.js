@@ -6,11 +6,14 @@ const getTopping = toppings => toppings.map(item => ({
 }));
 
 export const useToppings = openItem => {
-    const [toppings, setToppings] = useState(getTopping(openItem.toppings));
+
+    const readyTopping = openItem.toppings ? getTopping(openItem.toppings) : [];
+
+    const [toppings, setToppings] = useState(readyTopping);
 
     const checkToppings = index => {
         setToppings(toppings.map((item, i) => {
-            if (i == index) {
+            if (i === index) {
                 item.checked = !item.checked;
             }
 
@@ -19,4 +22,4 @@ export const useToppings = openItem => {
     }
 
     return { toppings, checkToppings };
-}
+};
