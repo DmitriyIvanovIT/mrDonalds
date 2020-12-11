@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Baner from './Baner';
-import DBMenu from './DBMenu';
 import ListItem from './ListItem';
+import { Context } from '../Functions/contex';
 
 
 const MenuStyled = styled.main`
@@ -18,28 +18,36 @@ const SectionMenu = styled.section`
     padding: 30px;
 `;
 
+const Menu = () => {
 
+    const { openItem: { setOpenItem }, dbMenu } = useContext(Context);
 
-const Menu = ({ setOpenItem }) => (
-    <>
-        <MenuStyled>
-            <Baner/>
-            <SectionMenu >
-                <h2>Бургеры</h2>
-                <ListItem 
-                    itemList={DBMenu.burger}
-                    setOpenItem={setOpenItem}
-                />
-            </SectionMenu>
-            <SectionMenu >
-                <h2>Закуски / Напитики</h2>
-                <ListItem 
-                    itemList={DBMenu.other}
-                    setOpenItem={setOpenItem}
-                />
-            </SectionMenu>
-        </MenuStyled>
-    </>
-);
+    return (
+        <>
+            <MenuStyled>
+                <Baner/>
+                {   dbMenu ?
+                    <>
+                        <SectionMenu >
+                            <h2>Бургеры</h2>
+                            <ListItem 
+                                itemList={dbMenu.burger}
+                                setOpenItem={setOpenItem}
+                            />
+                        </SectionMenu>
+                        <SectionMenu >
+                            <h2>Закуски / Напитики</h2>
+                            <ListItem 
+                                itemList={dbMenu.other}
+                                setOpenItem={setOpenItem}
+                            />
+                        </SectionMenu>
+                    </> : 
+                        <div>Loanding</div>
+                }
+            </MenuStyled>
+        </>
+    );
+}
 
 export default Menu;

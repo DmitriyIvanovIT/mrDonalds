@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import logoImg from '../../image/logo.svg';
 import logoSign from '../../image/sign.svg';
+import { Context } from '../Functions/contex';
 
 const NavBarStyled = styled.header`
     position: fixed;
@@ -41,9 +42,29 @@ const Login = styled.button`
     flex-direction: column;
 `;
 
+const User = styled.div`
+    display: flex;
+    align-items center;
+    flex-direction: column;
+`;
+
+const UserHeader = styled.div`
+    display: flex;
+    align-items center;
+    width: 100%;
+    justify-content: space-between;
+`;
+
 const LoinImage = styled.img`
     width: 32px;
     height: 32px;
+`;
+
+const UserImage = styled.img`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 `;
 
 const LoginText = styled.span`
@@ -56,18 +77,50 @@ const LoginText = styled.span`
     margin-top: 3px;
 `;
 
+const LogoutText = styled.button`
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+    margin-top: 3px;
+`;
 
-const NavBar = () => (
-    <NavBarStyled>
-        <Logo href="/">
-            <ImgLogo src={logoImg} alt='logo'/>
-            <H1>MRDonald’s</H1>
-        </Logo>
-        <Login>
-            <LoinImage src={logoSign} alt='logo'/>
-            <LoginText>Войти</LoginText>
-        </Login>
-    </NavBarStyled>
-);
+const UserName = styled.span`
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+    margin-top: 3px;
+`;
+
+const NavBar = () => {
+    const { auth: { authentication, login, logOut } } = useContext(Context);
+
+    return (
+        <NavBarStyled>
+            <Logo href="/">
+                <ImgLogo src={logoImg} alt='logo'/>
+                <H1>MRDonald’s</H1>
+            </Logo>
+            {authentication ?
+                <User>
+                    <UserHeader>
+                        <UserImage src={authentication.photoURL} alt={authentication.displayName}/>
+                        <LogoutText onClick={logOut}>Выйти</LogoutText>
+                    </UserHeader>
+                    <UserName>{authentication.displayName}</UserName>
+                </User> :
+                <Login onClick={login}>
+                    <LoinImage src={logoSign} alt='logo'/>
+                    <LoginText>Войти</LoginText>
+                </Login>
+            }
+        </NavBarStyled>
+    )
+};
 
 export default NavBar;

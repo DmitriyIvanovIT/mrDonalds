@@ -58,18 +58,23 @@ const ItemPrice = styled.span`
     text-align: right;
 `;
 
-const OrderListItem = ({ order }) => {
+const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
     const topping = order.topping.filter(item => item.checked)
     .map(item => item.name).join(', ');
 
     const choice = order.choice;
 
     return (
-        <OrderItemStyled>
+        <OrderItemStyled onClick={(e) => {
+            if (e.target.closest('button')) return
+            
+            setOpenItem({...order, index});
+            
+        }}>
             <ItemName>{order.name}</ItemName>
             <ItemCount>{order.count}</ItemCount>
             <ItemPrice>{formatCurrent(totalPriceItems(order))}</ItemPrice>
-            <TrashButton/>
+            <TrashButton onClick={() => deleteItem(index)}/>
             {topping !== '' &&
                 <ItemToppings>
                     Допы: {topping}
